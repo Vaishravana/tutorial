@@ -7,7 +7,7 @@ int main()
 {
     int fd;
     //create open a file
-    fd = open("locked_file.txt",O_CREAT|O_RDWR|0666);
+    fd = open("locked_file.txt",O_RDWR|O_APPEND|O_CREAT,0666);
     if (fd == -1)
     {   
         printf("File open failed\n");
@@ -16,7 +16,9 @@ int main()
     //Use the file descriptor and lock the file
     if(flock(fd, LOCK_EX)==-1)
     {
-        //err    
+        printf("Failed to obtain lockf\n");
+        close(fd);
+        return -1;
     }
     sleep(5);
     //Write into the file..and wait for 5s(just for experimentation)
