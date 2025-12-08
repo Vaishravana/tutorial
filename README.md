@@ -27,5 +27,8 @@ Lock held by      Lock requested    Result for    Why?
 Process A	        by Process B		  Process B
 
 LOCK_SH (Read)	  LOCK_SH (Read)	  Acquired	    It's safe for two readers.
+
 LOCK_EX (Write)	  LOCK_SH (Read)	  Blocked	      Cannot read while a write is happening.
+
 LOCK_SH (Read)	  LOCK_EX (Write)	  Blocked	      Cannot write while others are reading incomplete data.
+
